@@ -6,7 +6,7 @@ pipeline {
         stage('Clone Repository') {
             steps {
                 git branch: 'master',
-                url: https://github.com/DECKERED-SHAW/pipeline-project.git
+                    url: 'https://github.com/DECKERED-SHAW/pipeline-project.git'
             }
         }
 
@@ -15,16 +15,16 @@ pipeline {
                 sh '''
                 ssh -i /var/lib/jenkins/keypair.pem \
                 -o StrictHostKeyChecking=no \
-                ubuntu@<NGINX_PUBLIC_IP> "mkdir -p /tmp/website"
+                ubuntu@13.233.244.252 "mkdir -p /tmp/website"
 
                 scp -i /var/lib/jenkins/keypair.pem \
                 -o StrictHostKeyChecking=no \
                 -r * \
-                ubuntu@<NGINX_PUBLIC_IP>:/tmp/website/
+                ubuntu@13.233.244.252:/tmp/website/
 
                 ssh -i /var/lib/jenkins/keypair.pem \
                 -o StrictHostKeyChecking=no \
-                ubuntu@<NGINX_PUBLIC_IP> "
+                ubuntu@13.233.244.252 "
                 sudo cp -r /tmp/website/* /var/www/html/
                 sudo systemctl reload nginx
                 "
